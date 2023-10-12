@@ -2,8 +2,8 @@ package com.imen.garageApp.controller;
 
 import com.imen.garageApp.model.Car;
 import com.imen.garageApp.service.GarageService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,12 +12,33 @@ import java.util.List;
 
 public class GarageController {
 
-
+    @Autowired
     private GarageService garageService;
-    @RequestMapping("/cars")
 
-    public List<Car> getCar(){
+    @RequestMapping(method = RequestMethod.GET,value="/cars")
+    public List<Car> getCard(){
         return garageService.getCars();
     }
+
+    @RequestMapping( "/car/{id}")
+    public Car getCar(@PathVariable long id){
+        return garageService.getCar(id);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE,value ="/car/{id}" )
+    public void deleteCar(@PathVariable long id){
+        garageService.deleteCar(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value ="/cars" )
+    public void addCar(@RequestBody Car car){
+       garageService.addCar(car);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT,value ="/car/{id}" )
+    public void updateCar(@RequestBody  Car car ,@PathVariable long id){
+        garageService.updateCar(car,id);
+    }
+
 
 }
