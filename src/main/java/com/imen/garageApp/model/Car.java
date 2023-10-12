@@ -1,4 +1,9 @@
 package com.imen.garageApp.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+  @Entity
 
 public class Car {
 
@@ -8,7 +13,7 @@ public class Car {
         GREEN,
         YELLOW
     }
-
+    @Id
     private long id;
     private String model;
     private String brand;
